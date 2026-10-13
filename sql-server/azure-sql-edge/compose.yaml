@@ -1,0 +1,28 @@
+name: azure-sql-edge-service
+services:
+  azure-sql-edge:
+    # mssql server image isn't available for arm64 architecture,
+    # so we use Azure SQL instead
+    image: mcr.microsoft.com/azure-sql-edge:1.0.7
+    container_name: azure-sql-edge
+    ports:
+      - 1433:1433
+    environment:
+      - ACCEPT_EULA=1
+      - MSSQL_PID=Developer
+      # copy .env.example to .env and set your password there
+      # - MSSQL_SA_PASSWORD=<password>
+    restart: unless-stopped
+    volumes:
+      - azure-sql-edge-volume:/var/opt/mssql
+    networks:
+      - devnet
+
+networks:
+  devnet:
+    name: devnet
+    external: true
+
+volumes:
+  azure-sql-edge-volume:
+    name: azure-sql-edge-volume
