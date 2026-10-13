@@ -10,6 +10,8 @@ services:
       # copy .env.example to .env and set your password there
       # - MSSQL_SA_PASSWORD=<password>
     restart: unless-stopped
+    volumes:
+      - sql-server-2025-volume:/var/opt/mssql
     networks:
       - devnet
 
@@ -17,3 +19,7 @@ networks:
   devnet:
     name: devnet
     external: true
+
+volumes:
+  sql-server-2025-volume:
+    name: sql-server-2025-volume
