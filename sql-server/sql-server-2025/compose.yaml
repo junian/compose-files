@@ -1,0 +1,17 @@
+name: sql-server-2025
+services:
+  sql-server-2025:
+    image: mcr.microsoft.com/mssql/server:2025-latest
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=<password>
+    restart: unless-stopped
+    networks:
+      - devnet
+
+networks:
+  devnet:
+    name: devnet
+    external: true
