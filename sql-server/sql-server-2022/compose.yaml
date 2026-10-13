@@ -1,0 +1,18 @@
+name: sql-server-2022
+services:
+  sql-server-2022:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      # copy .env.example to .env and set your password there
+      # - MSSQL_SA_PASSWORD=<password>
+    restart: unless-stopped
+    networks:
+      - devnet
+
+networks:
+  devnet:
+    name: devnet
+    external: true
